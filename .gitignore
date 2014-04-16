@@ -1,0 +1,46 @@
+
+<!-- saved from url=(0045)http://www.gitignore.io/api/windows,osx,linux -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><style type="text/css"></style><style type="text/css"></style></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;"># Created by http://www.gitignore.io
+
+### Windows ###
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+
+### OSX ###
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must ends with two \r.
+Icon
+
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+
+### Linux ###
+*~
+
+# KDE directory preferences
+.directory
+
+</pre></body></html>
