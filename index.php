@@ -1,6 +1,7 @@
 <?php
-	require_once ('dados/ConexaoBanco.php');
-	$db = ConectarBanco();
+	require_once ('business/busGraunic.php');
+	$dados = ListarDados();
+	print_r($dados);
 ?>
 
 
