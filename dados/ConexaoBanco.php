@@ -10,9 +10,9 @@
 		
 		try
 		{
-		$conectar = new PDO($dsn,USER,PASS);
-		$conectar->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		return $conectar;
+			$conectar = new PDO($dsn,USER,PASS);
+			$conectar->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			return $conectar;
 		}
 		catch(PDOException $erro)
 		{

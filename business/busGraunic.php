@@ -1,5 +1,5 @@
 <?php
-	require_once ('../dados/ConexaoBanco.php');
+	require_once ('dados/ConexaoBanco.php');
 	
 	function ListarDados()
 	{

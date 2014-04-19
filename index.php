@@ -1,7 +1,11 @@
 <?php
 	require_once ('business/busGraunic.php');
 	$dados = ListarDados();
-	print_r($dados);
+	
+	foreach($dados as $lstDados)
+	{
+		echo $lstDados["nome"]."<br />";
+	}
 ?>
 
 
