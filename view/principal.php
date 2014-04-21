@@ -1,5 +1,5 @@
 <?php 
-    require_once ('../model/busGraunic.php');
+    require_once ('../model/BusGraunic.php');
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -72,7 +72,7 @@
                 <th>ID</th> 
                 <th>Cliente</th> 
             </tr> 
-                <?php $dados = ListarDados() ; foreach ($dados as $lstDados){ ?> 
+                <?php $dados = ListarLov() ; foreach ($dados as $lstDados){ ?> 
             <tr> 
                 <td><?php echo $lstDados["id_semestre"]; ?></td> 
                 <td><?php echo $lstDados["nome"]; ?></td> 
