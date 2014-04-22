@@ -16,5 +16,16 @@
                     {
                         echo "Erro: ".$erro->getMessage();		
                     }
-            } 
+            }
+            
+            function GadastrarPessoa($sQL)
+            {                    
+                    try
+                    {                        
+                    }
+                    catch(PDOException $erro)
+                    {
+                        echo "Erro: ".$erro->getMessage();		
+                    }
+            }
 ?>

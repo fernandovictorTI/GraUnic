@@ -38,7 +38,7 @@
       <div class="panel panel-primary" style="padding: 10px">
         <div class="panel-heading">Cadastrar Pessoa</div>
         <br />
-      <form role="form">
+        <form action="<?php $_SERVER['PHP_SELF'] ;?>" method="post">
           <div class="form-group">
               <label>Nome Completo*</label>
               <input type="text" class="form-control" id="nomePessoa" placeholder="Entre com seu nome completo">
@@ -83,7 +83,7 @@
                     <?php } ?>
                 </select>
           </div>
-      <button type="submit" class="btn btn-default">Voltar</button>
+      <button type="reset" class="btn btn-default">Limpar</button>
       <button type="submit" class="btn btn-primary">Cadastrar</button>
       </form>  
       </div>
