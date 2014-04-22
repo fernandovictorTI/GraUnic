@@ -72,27 +72,13 @@
                 <th>ID</th> 
                 <th>Cliente</th> 
             </tr> 
-                <?php $dados = ListarLov() ; foreach ($dados as $lstDados){ ?> 
+                <?php $dados = ListarLov("select * from lov_semestre") ; foreach ($dados as $lstDados){ ?> 
             <tr> 
                 <td><?php echo $lstDados["id_semestre"]; ?></td> 
                 <td><?php echo $lstDados["nome"]; ?></td> 
             </tr> 
                 <?php } ?> 
     </table>
-    <div class="btn-group">
-        <button type="button" class="btn btn-success">Action</button>
-        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-            <span class="caret"></span>
-            <span class="sr-only">Toggle Dropdown</span>
-        </button>
-        <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-        </ul>
-    </div>
       <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

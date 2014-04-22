@@ -35,6 +35,9 @@
             });
           })
       </script>
+      <div class="panel panel-primary" style="padding: 10px">
+        <div class="panel-heading">Cadastrar Pessoa</div>
+        <br />
       <form role="form">
           <div class="form-group">
               <label>Nome Completo*</label>
@@ -74,16 +77,16 @@
 <!--          Se for professor mostra isso-->
           <div id="materiasProfessor" class="form-group" style="display: none">
               <label>Disciplinas a serem dadas*</label>
-                <select class="form-control">
-                    <option value="0">*** Selecione ***</option>
+              <select multiple class="form-control" style="height: 100%">
                     <?php $materias = ListarLov("select * from tab_materia") ; foreach ($materias as $lstMaterias){ ?>
                     <option value="<?php echo $lstMaterias["id_materia"]; ?>"><?php echo $lstMaterias["nome_materia"]; ?></option>
                     <?php } ?>
                 </select>
-              <button type="submit" class="btn btn-default" style="margin-top: 5px">Adicionar matéria</button>
           </div>
-          <button type="submit" class="btn btn-default">Voltar</button>
-          <button type="submit" class="btn btn-primary">Cadastrar</button>
-      </form>
+      <button type="submit" class="btn btn-default">Voltar</button>
+      <button type="submit" class="btn btn-primary">Cadastrar</button>
+      </form>  
+      </div>
+  </div>
   </body>
 </html>
