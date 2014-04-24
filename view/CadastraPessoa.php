@@ -18,7 +18,15 @@
         }
       }
       $pessoa->SetCursoAluno($_POST['curso']);
-      CadastrarPessoa($pessoa);
+      $isCadastrado = CadastrarPessoa($pessoa);
+      if ($isCadastrado)
+      {
+        ?>
+        <script type="text/javascript">
+          alert("Cadastrado com sucesso");
+        </script>
+        <?php
+      }
     }
     
 ?>
