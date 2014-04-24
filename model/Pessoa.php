@@ -71,7 +71,7 @@
         
         function SetLstDisciplinas($disciplinas)
         {
-            array_push($this->lstDisciplinas,$disciplinas);
+            array_push($this->lstDisciplinas, $disciplinas);
         }
         
         function GetLstDisciplinas()

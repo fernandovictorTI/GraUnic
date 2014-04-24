@@ -1,5 +1,26 @@
 <?php 
     require_once ('../model/BusGraunic.php');
+    require_once ('../model/Pessoa.php');
+
+    if(isset($_POST['cadastrar']))
+    {
+      $pessoa = new Pessoa();
+      $pessoa->SetNome($_POST['nomePessoa']);
+      $pessoa->SetIdTipoCadastro($_POST['lovStatusPessoa']);
+      $pessoa->SetRG($_POST['rg']);
+      $pessoa->SetCPF($_POST['cpf']);
+      $pessoa->SetNuTelefone($_POST['nTelefone']);
+      $lstDis = isset($_POST['lstMat']) ? $_POST['lstMat'] : 0;
+      if (count($lstDis) > 0){
+        for($i = 0; $i < count($lstDis);$i++)
+        {
+          $pessoa->SetLstDisciplinas($lstDis[$i]);
+        }
+      }
+      $pessoa->SetCursoAluno($_POST['curso']);
+      CadastrarPessoa($pessoa);
+    }
+    
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -38,14 +59,14 @@
       <div class="panel panel-primary" style="padding: 10px">
         <div class="panel-heading">Cadastrar Pessoa</div>
         <br />
-        <form action="<?php $_SERVER['PHP_SELF'] ;?>" method="post">
+        <form method="post">
           <div class="form-group">
               <label>Nome Completo*</label>
-              <input type="text" class="form-control" id="nomePessoa" placeholder="Entre com seu nome completo">
+              <input type="text" placeholder="Entre com seu nome" class="form-control" name="nomePessoa"/>
           </div>
           <div class="form-group">
               <label>Tipo de Cadastro*</label>
-              <select id="lovStatusPessoa" class="form-control">
+              <select name="lovStatusPessoa" id="lovStatusPessoa" class="form-control">
                   <option value="0">*** Selecione ***</option>
                   <?php $dados = ListarLov("select * from lov_statuspessoa") ; foreach ($dados as $lstDados){ ?>
                   <option value="<?php echo $lstDados["id_status"]; ?>"><?php echo $lstDados["status"]; ?></option>
@@ -54,20 +75,20 @@
           </div>
           <div class="form-group">
               <label>RG*</label>
-              <input type="text" class="form-control" id="rg" placeholder="Entre com seu RG">
+              <input type="text" class="form-control" id="rg" name="rg" placeholder="Entre com seu RG">
           </div>
           <div class="form-group">
               <label>CPF*</label>
-              <input type="text" class="form-control" id="cpf" placeholder="Entre com seu CPF">
+              <input type="text" class="form-control" id="cpf" name="cpf" placeholder="Entre com seu CPF">
           </div>
           <div class="form-group">
               <label>Número de Telefone*</label>
-              <input type="text" class="form-control" id="nTelefone" placeholder="Entre com seu Telefone">
+              <input type="text" class="form-control" id="nTelefone" name="nTelefone" placeholder="Entre com seu Telefone">
           </div>
 <!--          Se for aluno mostra isso-->
           <div id="cursoAluno" class="form-group" style="display: none">
               <label>Curso do Aluno*</label>
-              <select class="form-control">
+              <select class="form-control" name="curso">
                   <option value="0">*** Selecione ***</option>
                   <?php $curso = ListarLov("select * from tab_curso") ; foreach ($curso as $lstCursos){ ?>
                   <option value="<?php echo $lstCursos["id_curso"]; ?>"><?php echo $lstCursos["nome_curso"]; ?></option>
@@ -77,14 +98,14 @@
 <!--          Se for professor mostra isso-->
           <div id="materiasProfessor" class="form-group" style="display: none">
               <label>Disciplinas a serem dadas*</label>
-              <select multiple class="form-control" style="height: 100%">
+              <select multiple name="lstMat[]" class="form-control">
                     <?php $materias = ListarLov("select * from tab_materia") ; foreach ($materias as $lstMaterias){ ?>
                     <option value="<?php echo $lstMaterias["id_materia"]; ?>"><?php echo $lstMaterias["nome_materia"]; ?></option>
                     <?php } ?>
-                </select>
+              </select>
           </div>
       <button type="reset" class="btn btn-default">Limpar</button>
-      <button type="submit" class="btn btn-primary">Cadastrar</button>
+      <button type="submit" class="btn btn-primary" name="cadastrar">Cadastrar</button>
       </form>  
       </div>
   </div>

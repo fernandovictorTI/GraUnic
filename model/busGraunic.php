@@ -4,4 +4,9 @@
             {                   
               return ListarDadosArray($sQL);
             }
+
+            function CadastrarAluno()
+            {
+            	CadastrarPessoa();
+            }
 ?>
