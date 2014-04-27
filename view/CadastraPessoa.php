@@ -4,31 +4,81 @@
 
     if(isset($_POST['cadastrar']))
     {
-      $pessoa = new Pessoa();
-      $pessoa->SetNome($_POST['nomePessoa']);
-      $pessoa->SetIdTipoCadastro($_POST['lovStatusPessoa']);
-      $pessoa->SetRG($_POST['rg']);
-      $pessoa->SetCPF($_POST['cpf']);
-      $pessoa->SetNuTelefone($_POST['nTelefone']);
-      $lstDis = isset($_POST['lstMat']) ? $_POST['lstMat'] : 0;
-      if (count($lstDis) > 0){
-        for($i = 0; $i < count($lstDis);$i++)
+      Validacoes();   
+    }
+
+    function Validacoes()
+      {
+        $isValidar = true;
+        $erro = array();
+        $msg = array(1 => "Erro.: Entre com o nome da pessoa.",
+                     2 => "Erro.: Entre com o status da pessoa.",                     
+                     );
+
+        if(is_null($_POST['nomePessoa']) || $_POST['nomePessoa'] == "")
         {
-          $pessoa->SetLstDisciplinas($lstDis[$i]);
+          $isValidar = false;
+          array_push($erro, 1);
+        }
+
+        if($_POST['lovStatusPessoa'][0] <= 0)
+        {
+          array_push($erro, 2);
+        }
+
+        if($isValidar == true)
+        {
+          Cadastrar();
+        }
+        else
+        {
+          $ms = new ArrayIterator($msg);
+          for($i = 0; $i <= count($erro);$i++)
+          {
+            if($erro[$i] == $ms->key())
+            {
+              ?>
+            <script type="text/javascript">
+            {
+                alert(<?php $ms->current(); ?>);              
+            }
+            </script>
+          <?php
+            }
+          }          
         }
       }
-      $pessoa->SetCursoAluno($_POST['curso']);
-      $isCadastrado = CadastrarPessoa($pessoa);
-      if ($isCadastrado)
-      {
-        ?>
-        <script type="text/javascript">
-          alert("Cadastrado com sucesso");
-        </script>
-        <?php
-      }
-    }
+
     
+      function Cadastrar()
+      {
+        $pessoa = new Pessoa();
+        $pessoa->SetNome($_POST['nomePessoa']);
+        $pessoa->SetIdTipoCadastro($_POST['lovStatusPessoa']);
+        $pessoa->SetRG($_POST['rg']);
+        $pessoa->SetCPF($_POST['cpf']);
+        $pessoa->SetNuTelefone($_POST['nTelefone']);
+        $lstDis = isset($_POST['lstMat']) ? $_POST['lstMat'] : 0;
+        if (count($lstDis) > 0){
+          for($i = 0; $i < count($lstDis);$i++)
+          {
+            $pessoa->SetLstDisciplinas($lstDis[$i]);
+          }
+        }
+        $pessoa->SetCursoAluno($_POST['curso']);
+        $isCadastrado = CadastrarPessoa($pessoa);
+        if ($isCadastrado)
+        {
+          ?>
+          <script type="text/javascript">
+          $(document).ready(function()
+          {
+            $('#divSuccess').css({display:block});
+          }
+          </script>
+          <?php
+        }
+      }      
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -44,6 +94,10 @@
   </head>
   <body style="padding: 5px">
       <script type="text/javascript">
+          function teste()
+          {
+            alert("Teste");
+          }
           $(document).ready(function(){
             $('#lovStatusPessoa').change(function(){
                 switch($('#lovStatusPessoa').val())
@@ -114,8 +168,13 @@
           </div>
       <button type="reset" class="btn btn-default">Limpar</button>
       <button type="submit" class="btn btn-primary" name="cadastrar">Cadastrar</button>
-      </form>  
+      </form>
       </div>
   </div>
+  <div id="divSuccess" class="alert alert-success alert-dismissable" style="display:none">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <strong>Cadastrado com successo.:</strong>
+  </div>
+  <div class="alert alert-danger"><strong>Insira os dados corretos e tente novamente.:</strong></div>
   </body>
 </html>
