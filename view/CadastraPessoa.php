@@ -2,11 +2,14 @@
     require_once ('../model/BusGraunic.php');
     require_once ('../model/Pessoa.php');
 
+    // VERIFICA SE HOUVE POST CADASTRAR
     if(isset($_POST['cadastrar']))
     {
       Validacoes();   
     }
+    // END VERIFICACAO POST CADASTRAR
 
+    // FUNCAO QUE VALIDA OS DADOS DIGITADOS PELO USUARIO
     function Validacoes()
       {
         $isValidar = true;
@@ -21,35 +24,96 @@
           array_push($erro, 1);
         }
 
-        if($_POST['lovStatusPessoa'][0] <= 0)
+        if($_POST['lovStatusPessoa'] <= 0)
         {
+          $isValidar = false;
           array_push($erro, 2);
+        }
+
+        if(is_null($_POST['rg']) || $_POST['rg'] == "")
+        {
+          $isValidar = false;
+          array_push($erro, 3);
+        }
+
+        if(is_null($_POST['cpf']) || $_POST['cpf'] == "")
+        {
+          $isValidar = false;
+          array_push($erro, 4);
+        }
+
+        if(is_null($_POST['nTelefone']) || $_POST['nTelefone'] == "")
+        {
+          $isValidar = false;
+          array_push($erro, 5);
+        }
+        
+        if($_POST['lovStatusPessoa'] == 2)
+        {
+          if($_POST['curso'] <= 0)
+          {
+            $isValidar = false;
+            array_push($erro, 6);
+          }
+        }
+
+        if($_POST['lovStatusPessoa'] == 1)
+        {
+          $lstDis = isset($_POST['lstMat']) ? $_POST['lstMat'] : 0;
+          if($lstDis <= 0)
+          {
+            $isValidar = false;
+            array_push($erro, 7);
+          }
         }
 
         if($isValidar == true)
         {
           Cadastrar();
         }
-        else
+        else 
         {
-          $ms = new ArrayIterator($msg);
-          for($i = 0; $i <= count($erro);$i++)
+          for($i = 0; $i < count($erro); $i++)
           {
-            if($erro[$i] == $ms->key())
-            {
-              ?>
-            <script type="text/javascript">
-            {
-                alert(<?php $ms->current(); ?>);              
-            }
-            </script>
-          <?php
-            }
-          }          
-        }
-      }
+            switch ($erro[$i]) {
+              case 1:
+              ?>  
+                <script type="text/javascript">
+                alert("Porque nao funciona!!!");
+                </script>
+              <?php
+                break;
 
-    
+              case 2:
+                echo $erro[$i]."<br />";
+                break;
+
+              case 3:
+                echo $erro[$i]."<br />";
+                break;
+
+              case 4:
+                echo $erro[$i]."<br />";
+                break; 
+
+              case 5:
+                echo $erro[$i]."<br />";
+                break; 
+
+              case 6:
+                echo $erro[$i]."<br />";
+                break; 
+
+              case 7:
+                echo $erro[$i]."<br />";
+                break; 
+            }            
+          }
+        }        
+      }
+      // END FUNCAO QUE VALIDA OS DADOS DIGITADOS PELO USUARIO
+
+      // FUNCAO QUE CADASTRA PESSOA(ALUNO - PROFESSOR)
       function Cadastrar()
       {
         $pessoa = new Pessoa();
@@ -59,7 +123,8 @@
         $pessoa->SetCPF($_POST['cpf']);
         $pessoa->SetNuTelefone($_POST['nTelefone']);
         $lstDis = isset($_POST['lstMat']) ? $_POST['lstMat'] : 0;
-        if (count($lstDis) > 0){
+        if (count($lstDis) > 0)
+        {
           for($i = 0; $i < count($lstDis);$i++)
           {
             $pessoa->SetLstDisciplinas($lstDis[$i]);
@@ -71,14 +136,12 @@
         {
           ?>
           <script type="text/javascript">
-          $(document).ready(function()
-          {
-            $('#divSuccess').css({display:block});
-          }
+            $('#divSuccess').css({display:'block'});
           </script>
           <?php
         }
-      }      
+      }
+      // END FUNCAO QUE CADASTRA PESSOA      
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -94,10 +157,6 @@
   </head>
   <body style="padding: 5px">
       <script type="text/javascript">
-          function teste()
-          {
-            alert("Teste");
-          }
           $(document).ready(function(){
             $('#lovStatusPessoa').change(function(){
                 switch($('#lovStatusPessoa').val())
@@ -175,6 +234,9 @@
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     <strong>Cadastrado com successo.:</strong>
   </div>
-  <div class="alert alert-danger"><strong>Insira os dados corretos e tente novamente.:</strong></div>
-  </body>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>  
 </html>
