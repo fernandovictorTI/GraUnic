@@ -14,8 +14,13 @@
       {
         $isValidar = true;
         $erro = array();
-        $msg = array(1 => "Erro.: Entre com o nome da pessoa.",
-                     2 => "Erro.: Entre com o status da pessoa.",                     
+        $msg = array(1 => "Erro.: Entre com o Nome da Pessoa.",
+                     2 => "Erro.: Entre com o Status da Pessoa.",
+                     3 => "Erro.: Entre com o RG da Pessoa.",
+                     4 => "Erro.: Entre com o CPF da Pessoa.",
+                     5 => "Erro.: Entre com o Número do Telefone.",
+                     6 => "Erro.: Entre com o Curso do Aluno.",
+                     7 => "Erro.: Entre com o Matérias da Professor.",                     
                      );
 
         if(is_null($_POST['nomePessoa']) || $_POST['nomePessoa'] == "")
@@ -77,35 +82,31 @@
           {
             switch ($erro[$i]) {
               case 1:
-              ?>  
-                <script type="text/javascript">
-                alert("Porque nao funciona!!!");
-                </script>
-              <?php
+              echo "<strong>".$msg[1]."</strong>";
                 break;
 
               case 2:
-                echo $erro[$i]."<br />";
+                echo "<strong>".$msg[2]."</strong>";
                 break;
 
               case 3:
-                echo $erro[$i]."<br />";
+                echo "<strong>".$msg[3]."</strong>";
                 break;
 
               case 4:
-                echo $erro[$i]."<br />";
+                echo "<strong>".$msg[4]."</strong>";
                 break; 
 
               case 5:
-                echo $erro[$i]."<br />";
+                echo "<strong>".$msg[5]."</strong>";
                 break; 
 
               case 6:
-                echo $erro[$i]."<br />";
+                echo "<strong>".$msg[6]."</strong>";
                 break; 
 
               case 7:
-                echo $erro[$i]."<br />";
+                echo "<strong>".$msg[7]."</strong>";
                 break; 
             }            
           }
@@ -230,7 +231,7 @@
       </form>
       </div>
   </div>
-  <div id="divSuccess" class="alert alert-success alert-dismissable" style="display:none">
+  <div id="divSuccess" class="alert alert-success" style="display:none">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     <strong>Cadastrado com successo.:</strong>
   </div>
