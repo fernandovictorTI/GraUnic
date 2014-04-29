@@ -20,7 +20,7 @@
                      4 => "Erro.: Entre com o CPF da Pessoa.",
                      5 => "Erro.: Entre com o Número do Telefone.",
                      6 => "Erro.: Entre com o Curso do Aluno.",
-                     7 => "Erro.: Entre com o Matérias da Professor.",                     
+                     7 => "Erro.: Entre com o Matérias do Professor.",                     
                      );
 
         if(is_null($_POST['nomePessoa']) || $_POST['nomePessoa'] == "")
@@ -82,31 +82,31 @@
           {
             switch ($erro[$i]) {
               case 1:
-              echo "<strong>".$msg[1]."</strong>";
+              echo"<script>alert('$msg[1]')</script>";
                 break;
 
               case 2:
-                echo "<strong>".$msg[2]."</strong>";
+                echo"<script>alert('$msg[2]')</script>";
                 break;
 
               case 3:
-                echo "<strong>".$msg[3]."</strong>";
+                echo"<script>alert('$msg[3]')</script>";
                 break;
 
               case 4:
-                echo "<strong>".$msg[4]."</strong>";
+                echo"<script>alert('$msg[4]')</script>";
                 break; 
 
               case 5:
-                echo "<strong>".$msg[5]."</strong>";
+                echo"<script>alert('$msg[5]')</script>";
                 break; 
 
               case 6:
-                echo "<strong>".$msg[6]."</strong>";
+                echo"<script>alert('$msg[6]')</script>";
                 break; 
 
               case 7:
-                echo "<strong>".$msg[7]."</strong>";
+                echo"<script>alert('$msg[7]')</script>";
                 break; 
             }            
           }
