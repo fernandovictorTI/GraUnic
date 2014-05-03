@@ -8,6 +8,7 @@
         private $numeroTelefone;
         private $lstDisciplinas = array();
         private $idCurso;
+        private $email;
         
         function SetNome($nomePessoa)
         {
@@ -77,6 +78,16 @@
         function GetLstDisciplinas()
         {
             return $this->lstDisciplinas;
+        }
+
+        function SetEmail($emailPessoa)
+        {
+            $this->email = $emailPessoa;
+        }
+        
+        function GetEmail()
+        {
+            return $this->email;
         }
     }
 ?>

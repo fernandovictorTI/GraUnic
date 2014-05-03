@@ -44,14 +44,15 @@
                     try
                     {  
                         $banco = ConectarBanco();
-                        $sql = $banco->prepare("insert into tab_pessoa (id_pessoa ,nome_pessoa, status_pessoa, rg_pessoa, cpf_pessoa, num_telefone, dataCadastro_pessoa)
-                                    values (:id, :nome, :status, :rg, :cpf, :nTelefone, now() )");
+                        $sql = $banco->prepare("insert into tab_pessoa (id_pessoa ,nome_pessoa, status_pessoa, rg_pessoa, cpf_pessoa, num_telefone, dataCadastro_pessoa, senha_pessoa,email_pessoa)
+                                    values (:id, :nome, :status, :rg, :cpf, :nTelefone, now(),123456, :emailPessoa )");
                         $sql->bindValue(':id',RetornarValorMax("SELECT max(id_pessoa) FROM tab_pessoa")+1,PDO::PARAM_INT);
                         $sql->bindValue(':nome',$PessoaOp->GetNome(),PDO::PARAM_STR);
                         $sql->bindValue(':status',$PessoaOp->GetIdTipoCadastro(),PDO::PARAM_INT);
                         $sql->bindValue(':rg',$PessoaOp->GetRG(),PDO::PARAM_INT);
                         $sql->bindValue(':cpf',$PessoaOp->GetCPF(),PDO::PARAM_STR);
                         $sql->bindValue(':nTelefone',$PessoaOp->GetNuTelefone(),PDO::PARAM_STR);
+                        $sql->bindValue(':emailPessoa',$PessoaOp->GetEmail(),PDO::PARAM_STR);
                         $sql->execute();
                         $sql = null;
                         if($PessoaOp->GetIdTipoCadastro() == "2")
@@ -83,7 +84,6 @@
                     }
                     catch(PDOException $erro)
                     {
-                        return false;
                         echo "Erro: ".$erro->getMessage();		
                     }
             }

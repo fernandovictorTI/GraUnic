@@ -20,8 +20,9 @@
                      4 => "Erro.: Entre com o CPF da Pessoa.",
                      5 => "Erro.: Entre com o Número do Telefone.",
                      6 => "Erro.: Entre com o Curso do Aluno.",
-                     7 => "Erro.: Entre com o Matérias do Professor.",                     
+                     7 => "Erro.: Entre com o Matérias do Professor."                     
                      );
+        $mensagem = "";
 
         if(is_null($_POST['nomePessoa']) || $_POST['nomePessoa'] == "")
         {
@@ -33,6 +34,12 @@
         {
           $isValidar = false;
           array_push($erro, 2);
+        }
+
+        if(is_null($_POST['email']) || $_POST['email'] == "")
+        {
+          $isValidar = false;
+          array_push($erro, 8);
         }
 
         if(is_null($_POST['rg']) || $_POST['rg'] == "")
@@ -78,38 +85,7 @@
         }
         else 
         {
-          for($i = 0; $i < count($erro); $i++)
-          {
-            switch ($erro[$i]) {
-              case 1:
-              echo"<script>alert('$msg[1]')</script>";
-                break;
-
-              case 2:
-                echo"<script>alert('$msg[2]')</script>";
-                break;
-
-              case 3:
-                echo"<script>alert('$msg[3]')</script>";
-                break;
-
-              case 4:
-                echo"<script>alert('$msg[4]')</script>";
-                break; 
-
-              case 5:
-                echo"<script>alert('$msg[5]')</script>";
-                break; 
-
-              case 6:
-                echo"<script>alert('$msg[6]')</script>";
-                break; 
-
-              case 7:
-                echo"<script>alert('$msg[7]')</script>";
-                break; 
-            }            
-          }
+          echo"<script>alert('Erro.: Entre com os dados corretamente.')</script>";           
         }        
       }
       // END FUNCAO QUE VALIDA OS DADOS DIGITADOS PELO USUARIO
@@ -120,6 +96,7 @@
         $pessoa = new Pessoa();
         $pessoa->SetNome($_POST['nomePessoa']);
         $pessoa->SetIdTipoCadastro($_POST['lovStatusPessoa']);
+        $pessoa->SetEmail($_POST['email']);
         $pessoa->SetRG($_POST['rg']);
         $pessoa->SetCPF($_POST['cpf']);
         $pessoa->SetNuTelefone($_POST['nTelefone']);
@@ -154,11 +131,11 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>    
   </head>
   <body style="padding: 5px">
-      <script type="text/javascript">
-          $(document).ready(function(){
+      <script type="text/javascript">      
+          $(document).ready(function(){              
             $('#lovStatusPessoa').change(function(){
                 switch($('#lovStatusPessoa').val())
                 {
@@ -175,6 +152,12 @@
                         $('#materiasProfessor').css({display:'none'});
                         break;
                 }
+            });
+
+            $(function(){
+                $('#rg').mask("999999-99");
+                $('#cpf').mask("999.999.999-99");
+                $('#nTelefone').mask("(99) 9999-9999");
             });
           })
       </script>
@@ -194,6 +177,10 @@
                   <option value="<?php echo $lstDados["id_status"]; ?>"><?php echo $lstDados["status"]; ?></option>
                   <?php } ?>
               </select>
+          </div>
+          <div class="form-group">
+              <label>E-mail*</label>
+              <input type="text" class="form-control" id="email" name="email" placeholder="Entre com seu E-mail">
           </div>
           <div class="form-group">
               <label>RG*</label>
@@ -221,8 +208,11 @@
           <div id="materiasProfessor" class="form-group" style="display: none">
               <label>Disciplinas a serem dadas*</label>
               <select multiple name="lstMat[]" class="form-control">
-                    <?php $materias = ListarLov("select * from tab_materia") ; foreach ($materias as $lstMaterias){ ?>
-                    <option value="<?php echo $lstMaterias["id_materia"]; ?>"><?php echo $lstMaterias["nome_materia"]; ?></option>
+                    <?php $materias = ListarLov("select tm.id_materia, tm.nome_materia from tab_materia tm 
+                                                 left outer join tab_professor tp on tp.cod_materia = tm.id_materia
+                                                 where tp.cod_materia is null order by tm.id_materia;") ; 
+                    foreach ($materias as $lstMaterias){ ?>
+                      <option value="<?php echo $lstMaterias["id_materia"]; ?>"><?php echo $lstMaterias["nome_materia"]; ?></option>
                     <?php } ?>
               </select>
           </div>
@@ -239,5 +229,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="Js/jquery.maskedinput.min.js"></script>
   </body>  
 </html>
