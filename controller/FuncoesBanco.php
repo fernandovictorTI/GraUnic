@@ -1,6 +1,7 @@
 <?php
         require_once ('../controller/ConexaoBanco.php');
         require_once ('../model/Pessoa.php');
+
             function ListarDadosArray($sQL)
             {                    
                 try
@@ -87,4 +88,5 @@
                         echo "Erro: ".$erro->getMessage();		
                     }
             }
+            
 ?>

@@ -18,9 +18,9 @@
                      2 => "Erro.: Entre com o Status da Pessoa.",
                      3 => "Erro.: Entre com o RG da Pessoa.",
                      4 => "Erro.: Entre com o CPF da Pessoa.",
-                     5 => "Erro.: Entre com o Número do Telefone.",
+                     5 => "Erro.: Entre com o NÃºmero do Telefone.",
                      6 => "Erro.: Entre com o Curso do Aluno.",
-                     7 => "Erro.: Entre com o Matérias do Professor."                     
+                     7 => "Erro.: Entre com o MatÃ©rias do Professor."                     
                      );
         $mensagem = "";
 
@@ -35,11 +35,18 @@
           $isValidar = false;
           array_push($erro, 2);
         }
-
+        
         if(is_null($_POST['email']) || $_POST['email'] == "")
         {
-          $isValidar = false;
-          array_push($erro, 8);
+            $isValidar = false;
+            array_push($erro, 8);
+        }
+
+        $emailPessoa = $_POST['email'];
+        if(BsContemDados("select count(id_pessoa) from tab_pessoa where email_pessoa = rtrim(ltrim('$emailPessoa'))") > 0)
+        {
+            $isValidar = false;
+            array_push($erro, 8);
         }
 
         if(is_null($_POST['rg']) || $_POST['rg'] == "")
@@ -191,7 +198,7 @@
               <input type="text" class="form-control" id="cpf" name="cpf" placeholder="Entre com seu CPF">
           </div>
           <div class="form-group">
-              <label>Número de Telefone*</label>
+              <label>NÃºmero de Telefone*</label>
               <input type="text" class="form-control" id="nTelefone" name="nTelefone" placeholder="Entre com seu Telefone">
           </div>
 <!--          Se for aluno mostra isso-->
