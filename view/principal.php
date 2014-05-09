@@ -1,5 +1,19 @@
 <?php 
     require_once ('../model/BusGraunic.php');
+
+    // VERIFICA SE HOUVE POST CADASTRAR
+    if(isset($_POST['logar']))
+    {
+      $emailPessoa = $_POST['email'];
+      $senhaPessoa = $_POST['password'];
+      $idPessoa = VerificaLogin($emailPessoa, $senhaPessoa);
+      if($idPessoa > 0)
+      {
+        $idCript = base64_encode($idPessoa);
+        header("Location: Portal.php?id=$idCript");
+      }   
+    }
+    // END VERIFICACAO POST CADASTRAR
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -20,16 +34,16 @@
 <div class="panel panel-primary">
   <div class="panel-heading">Acesso ao sistema</div>
   <div class="panel-body">
-    <form role="form">
+    <form method="post">
       <div class="form-group">
         <label for="exampleInputEmail1">Entre com seu e-mail.:</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+        <input name="email" type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
       </div>
       <div class="form-group">
         <label for="exampleInputPassword1">Senha.:</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
       </div>
-      <button type="submit" class="btn btn-default">Entrar</button>
+      <button type="submit" class="btn btn-default" name="logar">Entrar</button>
     </form>
     </div>
 </div>  

@@ -133,6 +133,7 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="text/html; charset=utf-8" />
+    <meta charset=utf-8 /> 
     <title>Sistema de Grades UNIC</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

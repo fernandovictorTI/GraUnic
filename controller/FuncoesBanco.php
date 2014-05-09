@@ -88,5 +88,25 @@
                         echo "Erro: ".$erro->getMessage();		
                     }
             }
+
+            function VerLogin($emailPessoa, $senhaPessoa)
+            {
+                try 
+                {
+                    $banco = ConectarBanco();
+                    $sql = $banco->prepare("select id_pessoa from tab_pessoa where email_pessoa = :email_pessoa and senha_pessoa = :senha_pessoa");
+                    $sql->bindValue(':email_pessoa',$emailPessoa,PDO::PARAM_STR);
+                    $sql->bindValue(':senha_pessoa',$senhaPessoa,PDO::PARAM_INT);
+                    $sql->execute();
+                    if($sql->rowCount() > 0)
+                    {
+                        return $sql->fetchAll(PDO::FETCH_ASSOC);
+                    } 
+                } 
+                catch(PDOException $erro)
+                {
+                    echo "Erro: ".$erro->getMessage();      
+                }
+            }
             
 ?>
