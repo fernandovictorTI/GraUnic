@@ -332,6 +332,7 @@
       }
       // END FUNCAO QUE CADASTRA PESSOA
 
+<<<<<<< HEAD
       /*
       *FUNCAO QUE RETORNA O ID DO DIA/HORARIO QUE O PROFESSOR ESCOLHEU PRA DAR AULA
       * 1 SEGUNDA 1°
@@ -376,3 +377,84 @@
         // END FUNCAO QUE RETORNA O ID DO DIA/HORARIO QUE O PROFESSOR ESCOLHEU PRA DAR AULA
       }      
 ?>
+=======
+            $(function(){
+                $('#rg').mask("999999-99");
+                $('#cpf').mask("999.999.999-99");
+                $('#nTelefone').mask("(99) 9999-9999");
+            });
+          })
+      </script>
+      <div class="panel panel-primary" style="padding: 10px">
+        <div class="panel-heading">Cadastrar Pessoa</div>
+        <br />
+        <form method="post">
+          <div class="form-group">
+              <label>Nome Completo*</label>
+              <input type="text" placeholder="Entre com seu nome" class="form-control" name="nomePessoa"/>
+          </div>
+          <div class="form-group">
+              <label>Tipo de Cadastro*</label>
+              <select name="lovStatusPessoa" id="lovStatusPessoa" class="form-control">
+                  <option value="0">*** Selecione ***</option>
+                  <?php $dados = ListarLov("select * from lov_statuspessoa") ; foreach ($dados as $lstDados){ ?>
+                  <option value="<?php echo $lstDados["id_status"]; ?>"><?php echo $lstDados["status"]; ?></option>
+                  <?php } ?>
+              </select>
+          </div>
+          <div class="form-group">
+              <label>E-mail*</label>
+              <input type="text" class="form-control" id="email" name="email" placeholder="Entre com seu E-mail">
+          </div>
+          <div class="form-group">
+              <label>RG*</label>
+              <input type="text" class="form-control" id="rg" name="rg" placeholder="Entre com seu RG">
+          </div>
+          <div class="form-group">
+              <label>CPF*</label>
+              <input type="text" class="form-control" id="cpf" name="cpf" placeholder="Entre com seu CPF">
+          </div>
+          <div class="form-group">
+              <label>Número de Telefone*</label>
+              <input type="text" class="form-control" id="nTelefone" name="nTelefone" placeholder="Entre com seu Telefone">
+          </div>
+<!--          Se for aluno mostra isso-->
+          <div id="cursoAluno" class="form-group" style="display: none">
+              <label>Curso do Aluno*</label>
+              <select class="form-control" name="curso">
+                  <option value="0">*** Selecione ***</option>
+                  <?php $curso = ListarLov("select * from tab_curso") ; foreach ($curso as $lstCursos){ ?>
+                  <option value="<?php echo $lstCursos["id_curso"]; ?>"><?php echo $lstCursos["nome_curso"]; ?></option>
+                  <?php } ?>
+              </select>
+          </div>
+<!--          Se for professor mostra isso-->
+          <div id="materiasProfessor" class="form-group" style="display: none">
+              <label>Disciplinas a serem dadas*</label>
+              <select multiple name="lstMat[]" class="form-control">
+                    <?php $materias = ListarLov("select tm.id_materia, tm.nome_materia from tab_materia tm 
+                                                 left outer join tab_professor tp on tp.cod_materia = tm.id_materia
+                                                 where tp.cod_materia is null order by tm.id_materia;") ; 
+                    foreach ($materias as $lstMaterias){ ?>
+                      <option value="<?php echo $lstMaterias["id_materia"]; ?>"><?php echo $lstMaterias["nome_materia"]; ?></option>
+                    <?php } ?>
+              </select>
+          </div>
+      <button type="reset" class="btn btn-default">Limpar</button>
+      <button type="submit" class="btn btn-primary" name="cadastrar">Cadastrar</button>
+      </form>
+      </div>
+  </div>
+  <div id="divSuccess" class="alert alert-success" style="display:none">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <strong>Cadastrado com successo.:</strong>
+  </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="Js/jquery.maskedinput.min.js"></script>
+  </body>
+  
+</html>
+>>>>>>> 9340e02b27e54ff591fd0305bf40edafe08b8a76
