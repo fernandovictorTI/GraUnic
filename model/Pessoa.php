@@ -9,6 +9,8 @@
         private $lstDisciplinas = array();
         private $idCurso;
         private $email;
+        private $codPriAula;
+        private $codSegAula;
         
         function SetNome($nomePessoa)
         {
@@ -88,6 +90,26 @@
         function GetEmail()
         {
             return $this->email;
+        }
+
+        function SetCodPriAula($priAula)
+        {
+            $this->codPriAula = $priAula;
+        }
+
+        function GetCodPriAula()
+        {
+            return $this->codPriAula;
+        }
+
+        function SetCodSegAula($segAula)
+        {
+            $this->codSegAula = $segAula;
+        }
+
+        function GetCodSegAula()
+        {
+            return $this->codSegAula;
         }
     }
 ?>

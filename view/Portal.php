@@ -1,4 +1,5 @@
 <?php
+require_once ('../model/BusGraunic.php');
 	require_once ('../model/BusGraunic.php');
 
 	$idPessoa = base64_decode($_GET['id']);
@@ -45,19 +46,32 @@
   		</tr>
   		<tr>
   			<td>19:00 as 20:15</td>
-  			<td>Segunda-Feira</td>
-  			<td>Terça-Feira</td>
-  			<td>Quarta-Feira</td>
-  			<td>Quinta-Feira</td>
-  			<td>Sexta-Feria</td>
+        <?php $materias = ListarLov("select tp.cod_horario,tm.nome_materia from tab_materia tm
+                            inner join tab_professor tp on tm.id_materia = tp.cod_materia");
+          for($i = 1; $i <= 5; $i++)
+          {
+            foreach ($materias as $key => $value) {
+              if($value['cod_horario'] == $i)
+              {
+                echo "<td>".$value['nome_materia']."</td>";
+              }
+            }
+          }
+        ?>
   		</tr>
   		<tr>
   			<td>20:45 as 22:00</td>
-  			<td>Segunda-Feira</td>
-  			<td>Terça-Feira</td>
-  			<td>Quarta-Feira</td>
-  			<td>Quinta-Feira</td>
-  			<td>Sexta-Feria</td>
+  			<?php 
+          for($i = 6; $i <= 10; $i++)
+          {
+            foreach ($materias as $key => $value) {
+              if($value['cod_horario'] == $i)
+              {
+                echo "<td>".$value['nome_materia']."</td>";
+              }
+            }
+          }
+        ?>
   		</tr>
 	</table>
   </div>

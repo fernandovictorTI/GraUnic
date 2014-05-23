@@ -72,11 +72,12 @@
                             $lastID = RetornarValorMax("SELECT max(cod_professor) FROM tab_professor")+1;
                             foreach ($PessoaOp->GetLstDisciplinas() as $value) 
                             {
-                                $sql = $banco->prepare("insert into tab_professor (cod_professor, cod_pessoa, cod_materia)
-                                                        values (:idProfessor,:id,:idMateria)");
+                                $sql = $banco->prepare("insert into tab_professor (cod_professor, cod_pessoa, cod_materia, cod_horario)
+                                                        values (:idProfessor,:id,:idMateria, :codHorario)");
                                 $sql->bindValue(':idProfessor',$lastID == null ? 1 : $lastID,PDO::PARAM_INT);
                                 $sql->bindValue(':id',RetornarValorMax("SELECT max(id_pessoa) FROM tab_pessoa"),PDO::PARAM_INT);
                                 $sql->bindValue(':idMateria',$value,PDO::PARAM_INT);
+                                $sql->bindValue(':codHorario',$PessoaOp->GetCodPriAula().$PessoaOp->GetCodSegAula(),PDO::PARAM_INT);
                                 $sql->execute();
                                 $sql = null;
                             }      
