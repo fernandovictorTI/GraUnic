@@ -9,6 +9,12 @@ require_once ('../model/BusGraunic.php');
 	foreach ($dadosPessoa as  $value) {
 		$pessoa->SetNome($value['nome_pessoa']);
 	}
+
+  if(isset($_POST['editar']))
+  {
+    $idPessoa = base64_encode($idPessoa);
+    header("Location: cadastraPessoa.php?editar=$idPessoa");
+  }
 ?>
 
 
@@ -31,7 +37,13 @@ require_once ('../model/BusGraunic.php');
   <body style="padding: 5px">
 <div class="panel panel-primary">
   <div class="panel-heading">Painel do sistema</div>
+  <form method="post">
+    <a href="principal.php" class="btn btn-link pull-right" name="sair"><i class="glyphicon glyphicon-off"></i> Sair</a>
+    <button class="btn btn-link pull-right" name="excluir"><i class="glyphicon glyphicon-trash"></i> Excluir Pessoa</button>
+    <button class="btn btn-link pull-right" name="editar"><i class="glyphicon glyphicon-user"></i> Editar Pessoa</button>
+  </form>
   <div class="panel-body">
+    <hr />
   	<h4>Bem Vindo <small><?php echo $pessoa->GetNome(); ?></small></h4>
   	<hr />
   	<h5>Grade do Aluno</h5>
@@ -50,8 +62,9 @@ require_once ('../model/BusGraunic.php');
                             inner join tab_professor tp on tm.id_materia = tp.cod_materia");
           for($i = 1; $i <= 5; $i++)
           {
-            foreach ($materias as $key => $value) {
-              if($value['cod_horario'] == $i)
+            foreach ($materias as $key => $value) 
+            {
+              if(substr($value['cod_horario'], 1) == $i || substr($value['cod_horario'], 2) == $i)
               {
                 echo "<td>".$value['nome_materia']."</td>";
               }
@@ -64,8 +77,9 @@ require_once ('../model/BusGraunic.php');
   			<?php 
           for($i = 6; $i <= 10; $i++)
           {
-            foreach ($materias as $key => $value) {
-              if($value['cod_horario'] == $i)
+            foreach ($materias as $key => $value) 
+            {
+              if(substr($value['cod_horario'], 1) == $i || substr($value['cod_horario'], 2) == $i)
               {
                 echo "<td>".$value['nome_materia']."</td>";
               }
@@ -73,10 +87,10 @@ require_once ('../model/BusGraunic.php');
           }
         ?>
   		</tr>
-	</table>
+	</table>  
   </div>
   </div>   
-      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>

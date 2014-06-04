@@ -23,9 +23,16 @@
             function VerificaLogin($emailPessoa, $senhaPessoa)
             {
               $valor = VerLogin($emailPessoa, $senhaPessoa);
-              foreach ($valor as $value) 
+              if(count($valor) > 0)
               {
-                return $value["id_pessoa"];
+                foreach ($valor as $value) 
+                {
+                  return $value["id_pessoa"];
+                }
+              }
+              else
+              {
+                return 0;
               }
             }
 

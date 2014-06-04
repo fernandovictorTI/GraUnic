@@ -1,19 +1,5 @@
 <?php 
-    require_once ('../model/BusGraunic.php');
-
-    // VERIFICA SE HOUVE POST CADASTRAR
-    if(isset($_POST['logar']))
-    {
-      $emailPessoa = $_POST['email'];
-      $senhaPessoa = $_POST['password'];
-      $idPessoa = VerificaLogin($emailPessoa, $senhaPessoa);
-      if($idPessoa > 0)
-      {
-        $idCript = base64_encode($idPessoa);
-        header("Location: Portal.php?id=$idCript");
-      }   
-    }
-    // END VERIFICACAO POST CADASTRAR
+    require_once ('../model/BusGraunic.php');    
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -43,13 +29,52 @@
         <label for="exampleInputPassword1">Senha.:</label>
         <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
       </div>
-      <button type="submit" class="btn btn-default" name="logar">Entrar</button>
+          <button type="submit" class="btn btn-default" name="logar">Entrar</button>
+          <a href="cadastrapessoa.php" class="pull-right"> <span class="glyphicon glyphicon-user"></span> Cadastrar Pessoa</a>
     </form>
     </div>
 </div>  
-      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
   </body>
 </html>
+
+<?php
+  // VERIFICA SE HOUVE POST CADASTRAR
+    if(isset($_POST['logar']))
+    {
+      $emailPessoa = $_POST['email'];
+      $senhaPessoa = $_POST['password'];
+      $idPessoa = VerificaLogin($emailPessoa, $senhaPessoa);
+      if($idPessoa > 0)
+      {
+        $idCript = base64_encode($idPessoa);
+        header("Location: Portal.php?id=$idCript");
+      }else
+      {
+        ?>
+        <!-- Modal -->
+              <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-body">
+                      <h4>Erro no login</h4>
+                      <hr />
+                      <p>Usuario ou senha invalido.:</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <script type="text/javascript">
+              $('#myModal').modal('show');
+            </script>
+            <?php
+      }  
+    }
+    // END VERIFICACAO POST CADASTRAR
+?>
