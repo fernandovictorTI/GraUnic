@@ -74,8 +74,8 @@
                     <?php } ?>
               </select>
               <hr />
-              <p>Escolha um dia e Horário para dar aula: <a href="#" id="element" data-toggle="tooltip" data-placement="left" title="Os critérios para organização do horário depende do tempo de cadastro do professor na instituição." ><span class="glyphicon glyphicon-comment"></span></a></p>
-              <div class="col-sm-12">
+              <p>Escolha um dia e Horário para dar aula: <span rel="tooltip" data-toggle="tooltip" data-placement="right" title="Os critérios para organização do horário depende do tempo de cadastro do professor na instituição." class="glyphicon glyphicon-comment"></span></p>
+              <div class="col-sm-12">t
                 <div class="col-sm-6">
                   <select name="priDia" class="form-control">
                         <option value="0">Selecione o dia</option>
@@ -152,7 +152,7 @@
                 $('#nTelefone').mask("(99) 9999-9999");
             });
 
-            $('#element').tooltip('show');
+            $('[rel="tooltip"]').tooltip();
 
           })
       </script>
